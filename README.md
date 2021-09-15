@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+## How to launch
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is simple React app, you will only need to install the dependencies, and start the app
 
-## Available Scripts
+```
+npm install
+npm start
+```
 
-In the project directory, you can run:
+# fighter
 
-### `npm start`
+Small React application based on "Tinder", where the user can match with other "users" in order to setup fight ?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The main goal of this project is to use React to create multiple generic components, that can be reused in other applications. 
+This allow us to create multiple applications based on the same generic concept of "matching" user.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Here we have our first idea : "Fighter", where you can find people in your area and in your weightclass to setup fight. But, if we change only the label, we can have a different concept : "Worker", where you can find worker in your area, that match your need (Developer, Laywer, etc)....
 
-### `npm test`
+This allow more flexibility in term of finding the "right" concept. The idea of "fighter" may be completely illegal and useless, but we don't have much work to do if we want to adapt it to another idea (in our case : a simple json file containing our label)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## External library used :
 
-### `npm run build`
+- React bootstrap :
+Just to make my life easier on the design
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- I18next :
+This internationalization framework is mainly used to provide a simple way to switch beetween langages. Here, we use it to switch beetween the different concept (fighter-worker)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
