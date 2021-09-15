@@ -18,6 +18,8 @@ Here we have our first idea : "Fighter", where you can find people in your area 
 
 This allow more flexibility in term of finding the "right" concept. The idea of "fighter" may be completely illegal and useless, but we don't have much work to do if we want to adapt it to another idea (in our case : a simple json file containing our label)
 
+The data set is the same for both concept : You can choose to fight them, or recruit them !
+
 ## External library used :
 
 - React bootstrap :
@@ -26,3 +28,6 @@ Just to make my life easier on the design
 - I18next :
 This internationalization framework is mainly used to provide a simple way to switch beetween langages. Here, we use it to switch beetween the different concept (fighter-worker)
 
+## How to use 
+
+You can switch "version" with the dropdown in the navigation bar on top. 
