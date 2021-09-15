@@ -1,0 +1,17 @@
+.match-creator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-go-back {
+    position: absolute;
+    left: 20px;
+    top: 70px;
+}
+
+.match-btn-group {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+}

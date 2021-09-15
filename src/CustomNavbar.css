@@ -1,0 +1,13 @@
+.accout-modify {
+    display: inline;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.inline-brand {
+    display: flex;
+}
+
+.dropdown {
+    margin-left: 5px;
+}

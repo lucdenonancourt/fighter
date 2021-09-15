@@ -1,0 +1,35 @@
+.match-remove-all {
+    position: absolute;
+    left: 20px;
+    top: 70px;
+}
+
+.list-empty {
+    font-size: 1.75rem;
+    color: gray;
+    font-style: italic;
+    font-weight: 100;
+    margin: 100px;
+}
+
+.match-list-group {
+    width : 50%;
+    min-width: 100px;
+}
+
+.text-center {
+    margin: 10px 0;
+}
+
+.btn-remove-match {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.no-more-person{
+    margin: 50px;
+    font-size: x-large;
+    color: gray;
+    font-style: italic;
+}

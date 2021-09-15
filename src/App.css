@@ -1,0 +1,77 @@
+.App {
+  text-align: center;
+}
+
+.app-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-logo {
+  height: 20vh;
+}
+
+.app-name {
+  color: rgba(43, 43, 44, 0.72);
+  font-size: 20vh;
+}
+
+.app-slogan {
+  color: #424242;
+}
+
+.btn-xxl {
+  background: white linear-gradient(to right, #FD297B 0%, #FF5864 51%, #FF655B 100%);
+  border-color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.btn-xxl:hover {
+  border-color: white;
+}
+.btn-xxl:focus {
+  box-shadow: 0 0 0 0.2rem #FF655B;
+}
+
+.main-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-outline-primary{
+  border-color: #FD297B;
+  color: #FD297B;
+}
+
+.btn-outline-primary:hover{
+  color: #fff;
+  background: white linear-gradient(to right, #FD297B 0%, #FF5864 51%, #FF655B 100%);
+  border-color: white;
+}
+
+.btn-outline-primary.focus, .btn-outline-primary:focus {
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: white linear-gradient(to right, #FD297B 0%, #FF5864 51%, #FF655B 100%);
+  border-color: white;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+  box-shadow: none;
+}
+.btn-link {
+  color: #FD297B
+}
+
+.modal-header {
+  flex-direction: column;
+}
+
+.app-slogan {
+  margin-top: 50px;
+}
