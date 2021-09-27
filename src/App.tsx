@@ -25,36 +25,33 @@ import SarahConnor from "./assets/sarah-connor.jpg";
 import TinkyWinky from  "./assets/tinky-winky.jpg";
 import CustomNavbar from "./CustomNavbar";
 import MatchList from "./MatchList";
-import { translate } from 'react-i18next';
 import i18n from "i18next";
+import {withTranslation} from "react-i18next";
+import { UserProvider } from './UserContext'
+import {Match} from "./Match";
+import {User} from "./User";
+import {Person} from "./Person";
+import {Categories} from "./Categories";
 
-/**
- * Main component for our app. In order to keep this application as light and simple as possible, we didn't
- * setup Routes. We have simple "states" to render what we need (creation/update of user info, matches list,
- * and match creation view
- */
-class App extends React.Component {
-    constructor(props) {
+class App extends React.Component<any, any>{
+    constructor(props : any) {
         super(props);
 
-        // We would rather have a token in our localStorage to authenticate the user
-        let currentUser = {}
+        let currentUser: User = null;
         let accountCreation = false;
         if(localStorage.getItem('userData') !== null){
-            currentUser = localStorage.getItem('userData')
-            currentUser = JSON.parse(currentUser);
+            const currentUserStr = localStorage.getItem('userData')
+            currentUser = JSON.parse(currentUserStr);
         } else {
             accountCreation = true;
         }
 
-        // So that a refresh doesn't empty our matches.
-        let matches = []
+        let matches: Match[] = []
         if(localStorage.getItem('matches') !== null){
-            matches = localStorage.getItem('matches')
-            matches = JSON.parse(matches);
+            const matchesStr = localStorage.getItem('matches')
+            matches = JSON.parse(matchesStr);
         }
 
-        // We check which version was last used (in local storage, again)
         let version = "fighter"
         if(localStorage.getItem('version') !== null){
             version = localStorage.getItem('version')
@@ -85,32 +82,32 @@ class App extends React.Component {
     render() {
         if(this.state.accountCreation || this.state.accountModification) {
             return (
-                <div>
-                    <CustomNavbar user={this.state.currentUser} handleLogout = {this.handleLogout} handleAccountModification = {this.handleAccountModification} t={this.props.t} changeVersion = {this.changeVersion}/>
-                    <UserForm user={this.state.currentUser} categories={this.state.categories} handleAccountCreation = {this.handleAccountCreation} t={this.props.t}/>
-                </div>
+                <UserProvider value={this.state.currentUser}>
+                    <CustomNavbar handleLogout = {this.handleLogout} handleAccountModification = {this.handleAccountModification} changeVersion = {this.changeVersion}/>
+                    <UserForm categories={this.state.categories} handleAccountCreation = {this.handleAccountCreation} t={this.props.t}/>
+                </UserProvider>
             )
         }
         if (this.state.createMatchState) {
             return (
-                <div>
-                    <CustomNavbar user={this.state.currentUser} handleLogout = {this.handleLogout} handleAccountModification = {this.handleAccountModification} t={this.props.t} changeVersion = {this.changeVersion}/>
-                    <MatchCreator user={this.state.currentUser} people={this.state.people} categories={this.state.categories} handleMatchCreation = {this.handleMatchCreation}  handleCancel = {this.handleCancel} t={this.props.t}/>
-                </div>
+                <UserProvider value={this.state.currentUser}>
+                    <CustomNavbar handleLogout = {this.handleLogout} handleAccountModification = {this.handleAccountModification} changeVersion = {this.changeVersion}/>
+                    <MatchCreator people={this.state.people} categories={this.state.categories} handleMatchCreation = {this.handleMatchCreation}  handleCancel = {this.handleCancel}/>
+                </UserProvider>
             )
         }
         return (
-                <div>
-                    <CustomNavbar user={this.state.currentUser} handleLogout = {this.handleLogout} handleAccountModification = {this.handleAccountModification} t={this.props.t} changeVersion = {this.changeVersion}/>
-                    <div className={"main-display"}>
-                        <h1 className={"app-slogan"}>{this.props.t('app-slogan')}</h1>
-                        <MatchList matches={this.state.matches} handleMatchRemoval = {this.handleMatchRemoval} removeAllMatches = {this.removeAllMatches} t={this.props.t}/>
-                        <Button variant="primary" size="xxl" onClick={this.createMatchState}>
-                            {this.props.t('app-btn-find-person')}
-                        </Button>
-                    </div>
+            <UserProvider value={this.state.currentUser}>
+                <CustomNavbar handleLogout = {this.handleLogout} handleAccountModification = {this.handleAccountModification} changeVersion = {this.changeVersion}/>
+                <div className={"main-display"}>
+                    <h1 className={"app-slogan"}>{this.props.t('app-slogan')}</h1>
+                    <MatchList matches={this.state.matches} handleMatchRemoval = {this.handleMatchRemoval} removeAllMatches = {this.removeAllMatches}/>
+                    <Button variant="primary" size="lg" onClick={this.createMatchState}>
+                        {this.props.t('app-btn-find-person')}
+                    </Button>
                 </div>
-            )
+            </UserProvider>
+        )
     }
 
     /**
@@ -125,7 +122,7 @@ class App extends React.Component {
      * Returned from our MatchCreator component with the match created
      * @param match Match created on our component
      */
-    handleMatchCreation = (match) =>{
+    handleMatchCreation = (match : Match) =>{
         this.setState({matches:[...this.state.matches, match]}, () => {
             localStorage.setItem('matches', JSON.stringify(this.state.matches));
         });
@@ -143,7 +140,7 @@ class App extends React.Component {
      * Returned from our UserForm component. We store the user in our localStorage
      * @param user User created with our form
      */
-    handleAccountCreation = (user) =>{
+    handleAccountCreation = (user : User) =>{
         localStorage.setItem('userData', JSON.stringify(user));
         this.setState({currentUser: user})
     }
@@ -167,8 +164,8 @@ class App extends React.Component {
      * Returned from our MatchList component when removing all elements
      * @param id The id of the match to remove
      */
-    handleMatchRemoval = (id) =>{
-        this.setState({matches: this.state.matches.filter(match => match.id !== id)})
+    handleMatchRemoval = (id : string) =>{
+        this.setState({matches: this.state.matches.filter((match: Match) => match.id !== id)})
     }
 
     /**
@@ -183,7 +180,7 @@ class App extends React.Component {
      * In real life, we should switch language, but in our little experiment, it switch the context of the app
      * @param version
      */
-    changeVersion = (version) => {
+    changeVersion = (version : string) => {
         i18n.changeLanguage(version);
         if(version === "worker") {
             this.setState({categories: categories_worker})
@@ -195,10 +192,10 @@ class App extends React.Component {
     }
 }
 
-export default translate()(App);
+export default withTranslation()(App);
 
 // Our "database" for the fighter app
-const people = [
+const people : Person[] = [
     {id: 1, name: "John Rambo", quote: "Don't push it or I'll give you a war you won't believe.", category: 4, location: 20, profilpicture: JohnRambo},
     {id: 2, name: "T-800", quote: "I need your clothes, your boots, and your motorcycle.", category: 5, location: 10, profilpicture: T800},
     {id: 3, name: "Chuck Norris", quote: "Men are like steel. When they lose their temper, they lose their worth.", category: 4, location: 30, profilpicture: ChuckNorris},
@@ -221,7 +218,7 @@ const people = [
     {id: 20, name: "Tinky Winky", quote: "Uh-oh...", category: 1, location: 80, profilpicture: TinkyWinky}
 ]
 
-const categories_fighter = [
+const categories_fighter: Categories[] = [
     {id: 1, label: "light flyweight"},
     {id: 2, label: "lightweight"},
     {id: 3, label: "middleweight"},
@@ -229,7 +226,7 @@ const categories_fighter = [
     {id: 5, label: "super heavyweight"},
 ]
 
-const categories_worker = [
+const categories_worker: Categories[] = [
     {id: 1, label: "Clown"},
     {id: 2, label: "Contractor"},
     {id: 3, label: "Financial advisor"},
